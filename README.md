@@ -10,6 +10,9 @@ A modern, responsive cybersecurity company website built with Next.js, TypeScrip
 - **TypeScript**: Type-safe development experience
 - **Tailwind CSS**: Utility-first CSS framework for rapid UI development
 - **Docker Support**: Containerized deployment ready
+- **Simple Contact Form**: Direct email integration using mailto links
+- **Professional Contact Information**: Clear contact details for clients
+- **Emergency Contact Section**: 24/7 incident response information
 
 ## 📋 Prerequisites
 
@@ -37,14 +40,7 @@ yarn install
 pnpm install
 ```
 
-#### Step 3: Environment Setup
-Create a `.env.local` file in the root directory (if needed):
-```env
-# Add any environment variables here
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
-
-#### Step 4: Run Development Server
+#### Step 3: Run Development Server
 ```bash
 npm run dev
 # or
@@ -55,7 +51,7 @@ pnpm dev
 
 The application will be available at `http://localhost:3000`
 
-#### Step 5: Build for Production
+#### Step 4: Build for Production
 ```bash
 npm run build
 npm start
@@ -176,6 +172,22 @@ Update the services array in `app/page.tsx` to modify the services section.
 
 ### Changing Colors and Styling
 Modify `tailwind.config.ts` to update the color scheme and design system.
+
+## 📧 Contact Form
+
+The website features a simple and effective contact form that uses mailto links to send emails directly to your contact@omsnet.co.uk address.
+
+**How it works:**
+1. Client fills out the contact form with their details and message
+2. When they click "Send Message", their email client opens with a pre-filled email
+3. The email is addressed to contact@omsnet.co.uk with the form data
+4. Client clicks "Send" in their email client to complete the submission
+
+**Benefits:**
+- **Simple**: No backend server required
+- **Reliable**: Uses the client's own email client
+- **Secure**: No data storage or processing on the server
+- **Professional**: Emails come directly from the client's email address
 
 ## 🔧 Available Scripts
 

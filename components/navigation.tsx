@@ -40,7 +40,12 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-            <Button className="glow">Get Started</Button>
+            <Button 
+              className="glow"
+              onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Get Started
+            </Button>
           </div>
 
           {/* Mobile Navigation */}
@@ -64,7 +69,15 @@ export function Navigation() {
                     {item.name}
                   </Link>
                 ))}
-                <Button className="w-full glow mt-4">Get Started</Button>
+                <Button 
+                  className="w-full glow mt-4"
+                  onClick={() => {
+                    setIsOpen(false);
+                    document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  Get Started
+                </Button>
               </div>
             </SheetContent>
           </Sheet>

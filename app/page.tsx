@@ -1,3 +1,5 @@
+'use client';
+
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
@@ -62,10 +64,19 @@ export default function Home() {
               Enterprise-grade cybersecurity solutions protecting your most valuable digital assets with cutting-edge technology and expert threat intelligence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="glow text-lg px-8 py-4">
+              <Button 
+                size="lg" 
+                className="glow text-lg px-8 py-4"
+                onClick={() => window.location.href = '/contact'}
+              >
                 Get Protected
               </Button>
-              <Button size="lg" variant="outline" className="text-lg px-8 py-4">
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-lg px-8 py-4"
+                onClick={() => document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' })}
+              >
                 Learn More
               </Button>
             </div>
@@ -74,7 +85,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20 bg-background/50">
+      <section id="services-section" className="py-20 bg-background/50">
         <div className="container mx-auto px-4">
           <div className="text-center space-y-4 mb-12">
             <h2 className="text-3xl md:text-4xl font-bold">Comprehensive Security Services</h2>
@@ -149,17 +160,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary/10">
+      {/* Contact CTA Section */}
+      <section id="contact-cta" className="py-20 bg-primary/10">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold">Ready to Secure Your Digital Assets?</h2>
             <p className="text-xl text-muted-foreground">
-              Schedule a consultation with our cybersecurity experts and get a comprehensive security assessment.
+              Contact us today for a comprehensive security assessment and consultation.
             </p>
-            <Button size="lg" className="glow text-lg px-8 py-4">
-              Schedule Consultation
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="glow text-lg px-8 py-4"
+                onClick={() => window.location.href = '/contact'}
+              >
+                Contact Us
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="text-lg px-8 py-4"
+                onClick={() => window.location.href = 'tel:01135347445'}
+              >
+                Call Now
+              </Button>
+            </div>
           </div>
         </div>
       </section>

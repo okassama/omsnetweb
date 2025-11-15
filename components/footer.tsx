@@ -62,14 +62,14 @@ export function Footer() {
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>San Francisco, CA</span>
+                <span>Leeds, West Yorkshire</span>
               </div>
             </div>
           </div>
         </div>
 
         <div className="border-t border-border/40 mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; 2024 Omsnet Digital Fortress. All rights reserved.</p>
+          <p>&copy; 2025 Omsnet Digital Fortress. All rights reserved.</p>
         </div>
       </div>
     </footer>
