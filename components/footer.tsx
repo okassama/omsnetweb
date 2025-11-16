@@ -1,11 +1,11 @@
 import Link from 'next/link';
-import { Shield, Mail, Phone, MapPin } from 'lucide-react';
+import { Shield, Mail, Phone, MapPin, Send } from 'lucide-react';
 
 export function Footer() {
   return (
     <footer className="border-t border-border/40 bg-background/95">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
@@ -65,6 +65,29 @@ export function Footer() {
                 <span>Leeds, West Yorkshire</span>
               </div>
             </div>
+          </div>
+
+          {/* Newsletter Signup */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold">Stay Secure</h3>
+            <p className="text-sm text-muted-foreground">
+              Get the latest cybersecurity insights and threat intelligence delivered to your inbox.
+            </p>
+            <form className="space-y-2">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="w-full px-3 py-2 text-sm bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                required
+              />
+              <button
+                type="submit"
+                className="w-full flex items-center justify-center space-x-2 px-3 py-2 text-sm bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors"
+              >
+                <Send className="h-4 w-4" />
+                <span>Subscribe</span>
+              </button>
+            </form>
           </div>
         </div>
 
