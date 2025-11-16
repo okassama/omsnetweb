@@ -240,11 +240,42 @@ export default function SecurityAssessment() {
                       className="flex-1 px-4 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     />
                     <div className="flex gap-2">
-                      <Button className="glow hover-lift hover-glow flex items-center space-x-2">
+                      <Button 
+                        className="glow hover-lift hover-glow flex items-center space-x-2"
+                        onClick={() => {
+                          if (email) {
+                            alert(`Thank you! Your security assessment report has been sent to ${email}`);
+                          } else {
+                            alert('Please enter your email address to receive the report.');
+                          }
+                        }}
+                      >
                         <Send className="h-4 w-4" />
                         <span>Get Report</span>
                       </Button>
-                      <Button variant="outline" className="flex items-center space-x-2">
+                      <Button 
+                        variant="outline" 
+                        className="flex items-center space-x-2"
+                        onClick={() => {
+                          // Create a simple PDF download simulation
+                          const element = document.createElement('a');
+                          const file = new Blob([
+                            `Omsnet Digital Fortress Security Assessment Report\n\n` +
+                            `Security Score: ${score}%\n` +
+                            `Risk Level: ${riskLevel.level}\n\n` +
+                            `Recommendations:\n${recommendations.map((rec, i) => `${i + 1}. ${rec}`).join('\n')}\n\n` +
+                            `Detailed Analysis:\n${assessmentQuestions.map(q => `${q.question}: ${answers[q.id] || 0}/4`).join('\n')}\n\n` +
+                            `Generated on: ${new Date().toLocaleDateString()}\n` +
+                            `Contact: contact@omsnet.co.uk\n` +
+                            `Phone: 0113 534 7445`
+                          ], { type: 'text/plain' });
+                          element.href = URL.createObjectURL(file);
+                          element.download = `security-assessment-${score}-${Date.now()}.txt`;
+                          document.body.appendChild(element);
+                          element.click();
+                          document.body.removeChild(element);
+                        }}
+                      >
                         <Download className="h-4 w-4" />
                         <span>Download PDF</span>
                       </Button>

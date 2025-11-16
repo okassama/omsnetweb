@@ -1,10 +1,14 @@
+'use client';
+
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar, User, ArrowRight, Shield, Eye, Zap, Cloud } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Blog() {
+  const router = useRouter();
   const blogPosts = [
     {
       id: 1,

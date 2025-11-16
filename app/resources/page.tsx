@@ -1,10 +1,14 @@
+'use client';
+
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Download, FileText, Shield, Lock, Users, CheckCircle, ArrowRight } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Resources() {
+  const router = useRouter();
   const resources = [
     {
       id: 1,
