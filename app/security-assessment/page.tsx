@@ -124,6 +124,80 @@ export default function SecurityAssessment() {
     return recommendations;
   };
 
+  const generateAssessmentReport = (score: number, riskLevel: any, recommendations: string[], questions: any[], answers: Record<string, number>) => {
+    const currentDate = new Date().toLocaleDateString();
+    
+    return `Omsnet Digital Fortress - Security Assessment Report
+
+COMPANY: Omsnet Digital Fortress
+CONTACT: contact@omsnet.co.uk | 0113 534 7445
+DATE: ${currentDate}
+REPORT ID: SA-${Date.now()}
+
+EXECUTIVE SUMMARY
+
+Overall Security Score: ${score}%
+Risk Level: ${riskLevel.level}
+Assessment Date: ${currentDate}
+
+${riskLevel.description}
+
+This report provides a comprehensive analysis of your organization's cybersecurity posture based on the assessment completed on ${currentDate}. The assessment evaluates key security domains including network security, data protection, incident response, compliance, and employee training.
+
+DETAILED SCORING BREAKDOWN
+
+${questions.map((q, index) => {
+  const answerScore = answers[q.id] || 0;
+  const percentage = (answerScore / 4) * 100;
+  const rating = answerScore >= 3 ? 'Strong' : answerScore >= 2 ? 'Moderate' : 'Weak';
+  return `${index + 1}. ${q.question}
+   Score: ${answerScore}/4 (${percentage}%) - ${rating}`;
+}).join('\n\n')}
+
+RECOMMENDED ACTIONS
+
+Based on your assessment results, we recommend the following actions to improve your security posture:
+
+${recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
+
+PRIORITY IMPLEMENTATION PLAN
+
+HIGH PRIORITY (Immediate - 30 days):
+- Implement comprehensive security framework
+- Establish 24/7 security monitoring
+- Develop incident response plan
+
+MEDIUM PRIORITY (30-90 days):
+- Enhance employee security training
+- Implement advanced threat detection
+- Regular security assessments
+
+LONG-TERM (90+ days):
+- Advanced encryption implementation
+- Multi-factor authentication
+- Regular penetration testing
+- Continuous security improvement program
+
+NEXT STEPS
+
+1. Schedule a consultation with our security experts
+2. Review and implement the recommended actions
+3. Conduct follow-up assessments every 6 months
+4. Consider our managed security services for ongoing protection
+
+CONTACT INFORMATION
+
+Omsnet Digital Fortress
+Email: contact@omsnet.co.uk
+Phone: 0113 534 7445
+Location: Leeds, West Yorkshire
+
+We specialize in helping organizations like yours build robust cybersecurity defenses and maintain compliance with industry standards.
+
+© 2025 Omsnet Digital Fortress - All Rights Reserved
+This report is confidential and intended for the recipient only.`;
+  };
+
   const currentQuestion = assessmentQuestions[currentStep];
   const score = calculateScore();
   const riskLevel = getRiskLevel(score);
@@ -257,20 +331,12 @@ export default function SecurityAssessment() {
                         variant="outline" 
                         className="flex items-center space-x-2"
                         onClick={() => {
-                          // Create a simple PDF download simulation
+                          // Create a professional PDF-like report
+                          const reportContent = generateAssessmentReport(score, riskLevel, recommendations, assessmentQuestions, answers);
                           const element = document.createElement('a');
-                          const file = new Blob([
-                            `Omsnet Digital Fortress Security Assessment Report\n\n` +
-                            `Security Score: ${score}%\n` +
-                            `Risk Level: ${riskLevel.level}\n\n` +
-                            `Recommendations:\n${recommendations.map((rec, i) => `${i + 1}. ${rec}`).join('\n')}\n\n` +
-                            `Detailed Analysis:\n${assessmentQuestions.map(q => `${q.question}: ${answers[q.id] || 0}/4`).join('\n')}\n\n` +
-                            `Generated on: ${new Date().toLocaleDateString()}\n` +
-                            `Contact: contact@omsnet.co.uk\n` +
-                            `Phone: 0113 534 7445`
-                          ], { type: 'text/plain' });
+                          const file = new Blob([reportContent], { type: 'text/plain' });
                           element.href = URL.createObjectURL(file);
-                          element.download = `security-assessment-${score}-${Date.now()}.txt`;
+                          element.download = `omsnet-security-assessment-report-${score}-${Date.now()}.txt`;
                           document.body.appendChild(element);
                           element.click();
                           document.body.removeChild(element);

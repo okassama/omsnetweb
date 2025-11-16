@@ -81,6 +81,251 @@ export default function Resources() {
     'Compliance'
   ];
 
+  const generateTemplateContent = (resource: any) => {
+    const templates = {
+      1: `Omsnet Digital Fortress - Cybersecurity Best Practices Guide
+
+COMPANY: Omsnet Digital Fortress
+CONTACT: contact@omsnet.co.uk | 0113 534 7445
+DATE: ${new Date().toLocaleDateString()}
+
+${resource.title}
+${'='.repeat(resource.title.length)}
+
+${resource.description}
+
+TABLE OF CONTENTS:
+1. Executive Summary
+2. Network Security Best Practices
+3. Data Protection Guidelines
+4. Access Control Policies
+5. Incident Response Procedures
+6. Employee Training Requirements
+7. Compliance Framework
+8. Implementation Checklist
+
+This comprehensive guide provides step-by-step instructions for implementing essential cybersecurity measures across your organization.
+
+© 2025 Omsnet Digital Fortress - All Rights Reserved`,
+
+      2: `Omsnet Digital Fortress - Incident Response Plan Template
+
+COMPANY: Omsnet Digital Fortress
+CONTACT: contact@omsnet.co.uk | 0113 534 7445
+DATE: ${new Date().toLocaleDateString()}
+
+${resource.title}
+${'='.repeat(resource.title.length)}
+
+${resource.description}
+
+INCIDENT RESPONSE PLAN TEMPLATE:
+
+1. PREPARATION PHASE
+   - Incident Response Team Roles & Responsibilities
+   - Communication Plan
+   - Resource Inventory
+   - Training Schedule
+
+2. DETECTION & ANALYSIS
+   - Monitoring Procedures
+   - Alert Thresholds
+   - Analysis Methodology
+   - Escalation Criteria
+
+3. CONTAINMENT & ERADICATION
+   - Immediate Actions
+   - System Isolation
+   - Threat Removal
+   - Evidence Preservation
+
+4. RECOVERY
+   - System Restoration
+   - Service Validation
+   - Monitoring Post-Recovery
+
+5. POST-INCIDENT ACTIVITY
+   - Lessons Learned
+   - Documentation Updates
+   - Process Improvements
+
+© 2025 Omsnet Digital Fortress - All Rights Reserved`,
+
+      3: `Omsnet Digital Fortress - Employee Security Awareness Checklist
+
+COMPANY: Omsnet Digital Fortress
+CONTACT: contact@omsnet.co.uk | 0113 534 7445
+DATE: ${new Date().toLocaleDateString()}
+
+${resource.title}
+${'='.repeat(resource.title.length)}
+
+${resource.description}
+
+SECURITY AWARENESS CHECKLIST:
+
+[ ] 1. BASIC SECURITY PRACTICES
+    [ ] Password complexity requirements
+    [ ] Multi-factor authentication
+    [ ] Secure file sharing
+    [ ] Device security
+
+[ ] 2. PHISHING AWARENESS
+    [ ] Recognize phishing attempts
+    [ ] Report suspicious emails
+    [ ] Verify sender authenticity
+    [ ] Avoid clicking unknown links
+
+[ ] 3. DATA PROTECTION
+    [ ] Classify sensitive data
+    [ ] Secure data storage
+    [ ] Proper data disposal
+    [ ] Encryption requirements
+
+[ ] 4. PHYSICAL SECURITY
+    [ ] Secure workstation
+    [ ] Visitor procedures
+    [ ] Document handling
+    [ ] Access control
+
+[ ] 5. INCIDENT REPORTING
+    [ ] Report security incidents
+    [ ] Contact information
+    [ ] Emergency procedures
+    [ ] Documentation requirements
+
+© 2025 Omsnet Digital Fortress - All Rights Reserved`,
+
+      4: `Omsnet Digital Fortress - Data Encryption Implementation Guide
+
+COMPANY: Omsnet Digital Fortress
+CONTACT: contact@omsnet.co.uk | 0113 534 7445
+DATE: ${new Date().toLocaleDateString()}
+
+${resource.title}
+${'='.repeat(resource.title.length)}
+
+${resource.description}
+
+DATA ENCRYPTION IMPLEMENTATION GUIDE:
+
+1. ASSESSMENT PHASE
+   - Data Classification
+   - Risk Assessment
+   - Compliance Requirements
+   - Technical Requirements
+
+2. PLANNING PHASE
+   - Encryption Strategy
+   - Key Management Plan
+   - Implementation Timeline
+   - Resource Allocation
+
+3. IMPLEMENTATION PHASE
+   - Data-at-Rest Encryption
+   - Data-in-Transit Encryption
+   - Key Management System
+   - Access Controls
+
+4. TESTING & VALIDATION
+   - Encryption Verification
+   - Performance Testing
+   - Security Testing
+   - Compliance Validation
+
+5. MAINTENANCE & MONITORING
+   - Regular Audits
+   - Key Rotation
+   - Performance Monitoring
+   - Incident Response
+
+© 2025 Omsnet Digital Fortress - All Rights Reserved`,
+
+      5: `Omsnet Digital Fortress - Compliance Requirements Matrix
+
+COMPANY: Omsnet Digital Fortress
+CONTACT: contact@omsnet.co.uk | 0113 534 7445
+DATE: ${new Date().toLocaleDateString()}
+
+${resource.title}
+${'='.repeat(resource.title.length)}
+
+${resource.description}
+
+COMPLIANCE FRAMEWORKS MATRIX:
+
+FRAMEWORK | DATA PROTECTION | ACCESS CONTROL | INCIDENT RESPONSE | AUDITING
+----------|----------------|----------------|-------------------|----------
+GDPR      | Encryption     | Role-based     | 72-hour reporting | Annual
+HIPAA     | PHI Protection | Minimum Necessary| Risk Analysis    | Regular
+PCI DSS   | Card Data      | Multi-factor    | Incident Response | Quarterly
+ISO 27001 | Risk-based     | Access Reviews  | Continuous Improvement| Annual
+SOC 2     | Confidentiality| Logical Access  | Security Monitoring| Annual
+
+IMPLEMENTATION GUIDANCE:
+- Conduct gap analysis for each framework
+- Prioritize based on business requirements
+- Implement controls systematically
+- Maintain documentation
+- Regular compliance assessments
+
+© 2025 Omsnet Digital Fortress - All Rights Reserved`,
+
+      6: `Omsnet Digital Fortress - Security Policy Templates Bundle
+
+COMPANY: Omsnet Digital Fortress
+CONTACT: contact@omsnet.co.uk | 0113 534 7445
+DATE: ${new Date().toLocaleDateString()}
+
+${resource.title}
+${'='.repeat(resource.title.length)}
+
+${resource.description}
+
+SECURITY POLICY TEMPLATES INCLUDED:
+
+1. ACCEPTABLE USE POLICY
+   - System Usage Guidelines
+   - Prohibited Activities
+   - Monitoring & Enforcement
+   - Consequences for Violations
+
+2. DATA PROTECTION POLICY
+   - Data Classification
+   - Handling Procedures
+   - Storage Requirements
+   - Disposal Methods
+
+3. ACCESS CONTROL POLICY
+   - User Account Management
+   - Authentication Requirements
+   - Privilege Management
+   - Access Reviews
+
+4. INCIDENT RESPONSE POLICY
+   - Response Team Structure
+   - Communication Procedures
+   - Investigation Process
+   - Recovery Procedures
+
+5. PHYSICAL SECURITY POLICY
+   - Facility Access
+   - Equipment Security
+   - Visitor Management
+   - Environmental Controls
+
+6. REMOTE WORK POLICY
+   - Device Requirements
+   - Network Security
+   - Data Handling
+   - Compliance Requirements
+
+© 2025 Omsnet Digital Fortress - All Rights Reserved`
+    };
+
+    return templates[resource.id as keyof typeof templates] || `Omsnet Digital Fortress - ${resource.title}\n\n${resource.description}\n\nContact: contact@omsnet.co.uk | Phone: 0113 534 7445\nDate: ${new Date().toLocaleDateString()}`;
+  };
+
   return (
     <div className="min-h-screen">
       <Navigation />
@@ -169,7 +414,20 @@ export default function Resources() {
                     <span>{resource.downloadCount}</span>
                   </div>
                   <div className="flex gap-2">
-                    <Button className="flex-1 glow hover-lift hover-glow flex items-center space-x-2">
+                    <Button 
+                      className="flex-1 glow hover-lift hover-glow flex items-center space-x-2"
+                      onClick={() => {
+                        // Create and download the template
+                        const templateContent = generateTemplateContent(resource);
+                        const element = document.createElement('a');
+                        const file = new Blob([templateContent], { type: 'text/plain' });
+                        element.href = URL.createObjectURL(file);
+                        element.download = `${resource.title.replace(/\s+/g, '-').toLowerCase()}-template.txt`;
+                        document.body.appendChild(element);
+                        element.click();
+                        document.body.removeChild(element);
+                      }}
+                    >
                       <Download className="h-4 w-4" />
                       <span>Download</span>
                     </Button>
