@@ -5,8 +5,11 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, Cloud, Eye, Zap } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+  
   const services = [
     {
       icon: Shield,
@@ -67,7 +70,7 @@ export default function Home() {
               <Button 
                 size="lg" 
                 className="glow text-lg px-8 py-4 hover-lift hover-glow animate-pulse-slow"
-                onClick={() => window.location.href = '/contact'}
+                onClick={() => router.push('/contact')}
               >
                 Get Protected
               </Button>
@@ -180,7 +183,7 @@ export default function Home() {
               <Button 
                 size="lg" 
                 className="glow text-lg px-8 py-4 hover-lift hover-glow animate-pulse-slow"
-                onClick={() => window.location.href = '/contact'}
+                onClick={() => router.push('/contact')}
               >
                 Contact Us
               </Button>
