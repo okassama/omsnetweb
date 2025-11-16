@@ -56,13 +56,13 @@ ${formData.message}
       
       {/* Hero Section */}
       <section className="relative overflow-hidden cyber-grid">
-        <div className="container mx-auto px-4 py-24 lg:py-32">
-          <div className="text-center space-y-8">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
+        <div className="container mx-auto px-4 py-16 sm:py-20 lg:py-32">
+          <div className="text-center space-y-6 sm:space-y-8">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight">
               Get In
               <span className="text-primary block">Touch</span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
               Ready to secure your digital assets? Contact our cybersecurity experts for a comprehensive security assessment.
             </p>
           </div>

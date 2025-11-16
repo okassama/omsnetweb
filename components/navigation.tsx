@@ -10,8 +10,8 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Services', href: '/services' },
-  { name: 'Resources', href: '/resources' },
   { name: 'Security Assessment', href: '/security-assessment' },
+  { name: 'Simulations', href: '/simulations' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ];
@@ -42,12 +42,6 @@ export function Navigation() {
                 {item.name}
               </Link>
             ))}
-            <Button 
-              className="glow"
-              onClick={() => document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Get Started
-            </Button>
           </div>
 
           {/* Mobile Navigation */}
@@ -71,15 +65,6 @@ export function Navigation() {
                     {item.name}
                   </Link>
                 ))}
-                <Button 
-                  className="w-full glow mt-4"
-                  onClick={() => {
-                    setIsOpen(false);
-                    document.getElementById('consultation-form')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  Get Started
-                </Button>
               </div>
             </SheetContent>
           </Sheet>

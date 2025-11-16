@@ -1,10 +1,15 @@
+'use client';
+
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Shield, Cloud, Eye, Zap, FileCheck, Users, CheckCircle } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 export default function Services() {
+  const router = useRouter();
+  
   const services = [
     {
       icon: Shield,
@@ -85,7 +90,12 @@ export default function Services() {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full">Learn More</Button>
+                  <Button 
+                    className="w-full hover-lift hover-glow"
+                    onClick={() => router.push('/contact')}
+                  >
+                    Learn More
+                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -101,7 +111,11 @@ export default function Services() {
             <p className="text-xl text-muted-foreground">
               Our experts can design tailored security solutions to meet your specific business requirements.
             </p>
-            <Button size="lg" className="glow text-lg px-8 py-4">
+            <Button 
+              size="lg" 
+              className="glow text-lg px-8 py-4 hover-lift hover-glow"
+              onClick={() => router.push('/contact')}
+            >
               Get Custom Quote
             </Button>
           </div>

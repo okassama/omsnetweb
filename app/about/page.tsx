@@ -57,7 +57,7 @@ export default function About() {
                 To provide enterprise-grade cybersecurity solutions that empower organizations to operate securely in an increasingly digital world. We believe that security should be an enabler, not a barrier to innovation.
               </p>
               <p className="text-lg text-muted-foreground">
-                Founded in 2020, Omsnet Digital Fortress has grown from a small team of security experts to a global leader in cybersecurity services, protecting over 500 enterprise clients across multiple industries.
+                Founded in 2020, Omsnet Digital Fortress brings enterprise-grade cybersecurity expertise to businesses of all sizes, delivering innovative security solutions with the precision and dedication of a specialized team.
               </p>
             </div>
             <div className="grid grid-cols-2 gap-4">

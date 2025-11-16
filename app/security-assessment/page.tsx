@@ -4,7 +4,6 @@ import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { useState } from 'react';
 import { Shield, CheckCircle, AlertTriangle, TrendingUp, Download, Send } from 'lucide-react';
 
@@ -126,76 +125,241 @@ export default function SecurityAssessment() {
 
   const generateAssessmentReport = (score: number, riskLevel: any, recommendations: string[], questions: any[], answers: Record<string, number>) => {
     const currentDate = new Date().toLocaleDateString();
+    const reportId = `SA-${Date.now()}`;
     
-    return `Omsnet Digital Fortress - Security Assessment Report
+    // Create a rich text Word document with company letterhead
+    const wordDocument = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Omsnet Digital Fortress - Security Assessment Report</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 40px;
+    line-height: 1.6;
+    color: #333;
+  }
+  .letterhead {
+    border-bottom: 3px solid #2563eb;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+  }
+  .company-name {
+    font-size: 28px;
+    font-weight: bold;
+    color: #2563eb;
+    margin-bottom: 5px;
+  }
+  .company-tagline {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  .contact-info {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  .report-header {
+    background-color: #f8fafc;
+    padding: 20px;
+    border-left: 4px solid #2563eb;
+    margin-bottom: 30px;
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2563eb;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 5px;
+  }
+  .score-display {
+    background-color: #2563eb;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  .score-number {
+    font-size: 48px;
+    font-weight: bold;
+  }
+  .risk-level {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  .recommendation-item {
+    background-color: #f0f9ff;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 4px solid #0ea5e9;
+    border-radius: 4px;
+  }
+  .question-analysis {
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #f8fafc;
+    border-radius: 6px;
+  }
+  .footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  th, td {
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+    text-align: left;
+  }
+  th {
+    background-color: #f1f5f9;
+    font-weight: bold;
+  }
+</style>
+</head>
+<body>
+  <div class="letterhead">
+    <div class="company-name">Omsnet Digital Fortress</div>
+    <div class="company-tagline">Cybersecurity Excellence & Digital Protection</div>
+    <div class="contact-info">
+      Email: contact@omsnet.co.uk | Phone: 0113 534 7445 | Location: Leeds, West Yorkshire
+    </div>
+  </div>
 
-COMPANY: Omsnet Digital Fortress
-CONTACT: contact@omsnet.co.uk | 0113 534 7445
-DATE: ${currentDate}
-REPORT ID: SA-${Date.now()}
+  <div class="report-header">
+    <h1 style="color: #2563eb; margin: 0 0 10px 0;">Security Assessment Report</h1>
+    <p style="margin: 0; color: #666;">Report ID: ${reportId} | Assessment Date: ${currentDate}</p>
+  </div>
 
-EXECUTIVE SUMMARY
+  <div class="score-display">
+    <div class="score-number">${score}%</div>
+    <div class="risk-level">${riskLevel.level}</div>
+  </div>
 
-Overall Security Score: ${score}%
-Risk Level: ${riskLevel.level}
-Assessment Date: ${currentDate}
+  <div class="section-title">EXECUTIVE SUMMARY</div>
+  <p><strong>Overall Security Score:</strong> ${score}%</p>
+  <p><strong>Risk Level:</strong> ${riskLevel.level}</p>
+  <p><strong>Assessment Date:</strong> ${currentDate}</p>
+  <p>${riskLevel.description}</p>
+  <p>This report provides a comprehensive analysis of your organization's cybersecurity posture based on the assessment completed on ${currentDate}. The assessment evaluates key security domains including network security, data protection, incident response, compliance, and employee training.</p>
 
-${riskLevel.description}
+  <div class="section-title">DETAILED SCORING BREAKDOWN</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Score</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${questions.map((q, index) => {
+        const answerScore = answers[q.id] || 0;
+        const percentage = (answerScore / 4) * 100;
+        const rating = answerScore >= 3 ? 'Strong' : answerScore >= 2 ? 'Moderate' : 'Weak';
+        const ratingColor = answerScore >= 3 ? '#10b981' : answerScore >= 2 ? '#f59e0b' : '#ef4444';
+        return `<tr>
+          <td>${q.question}</td>
+          <td>${answerScore}/4 (${percentage}%)</td>
+          <td style="color: ${ratingColor}; font-weight: bold;">${rating}</td>
+        </tr>`;
+      }).join('')}
+    </tbody>
+  </table>
 
-This report provides a comprehensive analysis of your organization's cybersecurity posture based on the assessment completed on ${currentDate}. The assessment evaluates key security domains including network security, data protection, incident response, compliance, and employee training.
+  <div class="section-title">RECOMMENDED ACTIONS</div>
+  ${recommendations.map((rec, index) => `
+    <div class="recommendation-item">
+      <strong>${index + 1}.</strong> ${rec}
+    </div>
+  `).join('')}
 
-DETAILED SCORING BREAKDOWN
+  <div class="section-title">PRIORITY IMPLEMENTATION PLAN</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Priority Level</th>
+        <th>Timeline</th>
+        <th>Key Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HIGH PRIORITY</strong></td>
+        <td>Immediate - 30 days</td>
+        <td>
+          <ul style="margin: 0; padding-left: 20px;">
+            <li>Implement comprehensive security framework</li>
+            <li>Establish 24/7 security monitoring</li>
+            <li>Develop incident response plan</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>MEDIUM PRIORITY</strong></td>
+        <td>30-90 days</td>
+        <td>
+          <ul style="margin: 0; padding-left: 20px;">
+            <li>Enhance employee security training</li>
+            <li>Implement advanced threat detection</li>
+            <li>Regular security assessments</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td><strong>LONG-TERM</strong></td>
+        <td>90+ days</td>
+        <td>
+          <ul style="margin: 0; padding-left: 20px;">
+            <li>Advanced encryption implementation</li>
+            <li>Multi-factor authentication</li>
+            <li>Regular penetration testing</li>
+            <li>Continuous security improvement program</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-${questions.map((q, index) => {
-  const answerScore = answers[q.id] || 0;
-  const percentage = (answerScore / 4) * 100;
-  const rating = answerScore >= 3 ? 'Strong' : answerScore >= 2 ? 'Moderate' : 'Weak';
-  return `${index + 1}. ${q.question}
-   Score: ${answerScore}/4 (${percentage}%) - ${rating}`;
-}).join('\n\n')}
+  <div class="section-title">NEXT STEPS</div>
+  <ol style="margin: 15px 0; padding-left: 20px;">
+    <li>Schedule a consultation with our security experts</li>
+    <li>Review and implement the recommended actions</li>
+    <li>Conduct follow-up assessments every 6 months</li>
+    <li>Consider our managed security services for ongoing protection</li>
+  </ol>
 
-RECOMMENDED ACTIONS
+  <div class="section-title">CONTACT INFORMATION</div>
+  <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px;">
+    <p><strong>Omsnet Digital Fortress</strong></p>
+    <p>Email: <a href="mailto:contact@omsnet.co.uk">contact@omsnet.co.uk</a></p>
+    <p>Phone: 0113 534 7445</p>
+    <p>Location: Leeds, West Yorkshire</p>
+    <p>We specialize in helping organizations like yours build robust cybersecurity defenses and maintain compliance with industry standards.</p>
+  </div>
 
-Based on your assessment results, we recommend the following actions to improve your security posture:
-
-${recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
-
-PRIORITY IMPLEMENTATION PLAN
-
-HIGH PRIORITY (Immediate - 30 days):
-- Implement comprehensive security framework
-- Establish 24/7 security monitoring
-- Develop incident response plan
-
-MEDIUM PRIORITY (30-90 days):
-- Enhance employee security training
-- Implement advanced threat detection
-- Regular security assessments
-
-LONG-TERM (90+ days):
-- Advanced encryption implementation
-- Multi-factor authentication
-- Regular penetration testing
-- Continuous security improvement program
-
-NEXT STEPS
-
-1. Schedule a consultation with our security experts
-2. Review and implement the recommended actions
-3. Conduct follow-up assessments every 6 months
-4. Consider our managed security services for ongoing protection
-
-CONTACT INFORMATION
-
-Omsnet Digital Fortress
-Email: contact@omsnet.co.uk
-Phone: 0113 534 7445
-Location: Leeds, West Yorkshire
-
-We specialize in helping organizations like yours build robust cybersecurity defenses and maintain compliance with industry standards.
-
-© 2025 Omsnet Digital Fortress - All Rights Reserved
-This report is confidential and intended for the recipient only.`;
+  <div class="footer">
+    <p>© 2025 Omsnet Digital Fortress - All Rights Reserved</p>
+    <p>This report is confidential and intended for the recipient only.</p>
+    <p>Generated on: ${new Date().toLocaleString()}</p>
+  </div>
+</body>
+</html>`;
+    
+    return wordDocument;
   };
 
   const currentQuestion = assessmentQuestions[currentStep];
@@ -225,23 +389,28 @@ This report is confidential and intended for the recipient only.`;
               {/* Score Card */}
               <Card className="border-border/40 hover:glow hover-lift transition-all duration-300 mb-8">
                 <CardHeader className="text-center">
-                  <CardTitle className="text-3xl mb-4">Your Security Score</CardTitle>
-                  <div className="flex items-center justify-center space-x-4">
-                    <div className={`text-6xl font-bold ${riskLevel.color}`}>
+                  <CardTitle className="text-2xl sm:text-3xl mb-4">Your Security Score</CardTitle>
+                  <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <div className={`text-5xl sm:text-6xl font-bold ${riskLevel.color}`}>
                       {score}%
                     </div>
-                    <div className="text-left">
-                      <div className={`text-xl font-semibold ${riskLevel.color}`}>
+                    <div className="text-center sm:text-left">
+                      <div className={`text-lg sm:text-xl font-semibold ${riskLevel.color}`}>
                         {riskLevel.level}
                       </div>
-                      <div className="text-muted-foreground">
+                      <div className="text-muted-foreground text-sm sm:text-base">
                         {riskLevel.description}
                       </div>
                     </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <Progress value={score} className="h-3" />
+                  <div className="w-full bg-gray-200 rounded-full h-3">
+                    <div 
+                      className="h-3 rounded-full bg-primary transition-all duration-300"
+                      style={{width: `${score}%`}}
+                    ></div>
+                  </div>
                 </CardContent>
               </Card>
 
@@ -286,10 +455,12 @@ This report is confidential and intended for the recipient only.`;
                             {answers[question.id] || 0}/4
                           </span>
                         </div>
-                        <Progress 
-                          value={((answers[question.id] || 0) / 4) * 100} 
-                          className="h-2"
-                        />
+                        <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="h-2 rounded-full bg-primary transition-all duration-300"
+                            style={{width: `${((answers[question.id] || 0) / 4) * 100}%`}}
+                          ></div>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -299,23 +470,23 @@ This report is confidential and intended for the recipient only.`;
               {/* Email Capture */}
               <Card className="border-border/40 hover:glow hover-lift transition-all duration-300">
                 <CardHeader>
-                  <CardTitle>Get Your Detailed Report</CardTitle>
-                  <CardDescription>
+                  <CardTitle className="text-xl sm:text-2xl">Get Your Detailed Report</CardTitle>
+                  <CardDescription className="text-sm sm:text-base">
                     Enter your email to receive a comprehensive security assessment report with detailed recommendations.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex flex-col gap-4">
                     <input
                       type="email"
                       placeholder="Enter your email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="flex-1 px-4 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      className="w-full px-4 py-3 bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-base"
                     />
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2">
                       <Button 
-                        className="glow hover-lift hover-glow flex items-center space-x-2"
+                        className="glow hover-lift hover-glow flex items-center justify-center space-x-2 py-3"
                         onClick={() => {
                           if (email) {
                             alert(`Thank you! Your security assessment report has been sent to ${email}`);
@@ -329,21 +500,21 @@ This report is confidential and intended for the recipient only.`;
                       </Button>
                       <Button 
                         variant="outline" 
-                        className="flex items-center space-x-2"
+                        className="flex items-center justify-center space-x-2 py-3"
                         onClick={() => {
-                          // Create a professional PDF-like report
+                          // Create a professional Word document with company letterhead
                           const reportContent = generateAssessmentReport(score, riskLevel, recommendations, assessmentQuestions, answers);
                           const element = document.createElement('a');
-                          const file = new Blob([reportContent], { type: 'text/plain' });
+                          const file = new Blob([reportContent], { type: 'application/msword' });
                           element.href = URL.createObjectURL(file);
-                          element.download = `omsnet-security-assessment-report-${score}-${Date.now()}.txt`;
+                          element.download = `omsnet-security-assessment-report-${score}-${Date.now()}.doc`;
                           document.body.appendChild(element);
                           element.click();
                           document.body.removeChild(element);
                         }}
                       >
                         <Download className="h-4 w-4" />
-                        <span>Download PDF</span>
+                        <span>Download Word Document</span>
                       </Button>
                     </div>
                   </div>
@@ -393,7 +564,12 @@ This report is confidential and intended for the recipient only.`;
                 <span>Question {currentStep + 1} of {assessmentQuestions.length}</span>
                 <span>{Math.round(((currentStep + 1) / assessmentQuestions.length) * 100)}% Complete</span>
               </div>
-              <Progress value={((currentStep + 1) / assessmentQuestions.length) * 100} className="h-2" />
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div 
+                  className="h-2 rounded-full bg-primary transition-all duration-300"
+                  style={{width: `${((currentStep + 1) / assessmentQuestions.length) * 100}%`}}
+                ></div>
+              </div>
             </div>
 
             {/* Question Card */}

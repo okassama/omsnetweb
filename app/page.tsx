@@ -2,6 +2,7 @@
 
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
+import { VisitorInfo } from '@/components/visitor-info';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, Cloud, Eye, Zap } from 'lucide-react';
@@ -33,55 +34,54 @@ export default function Home() {
     },
   ];
 
-  const testimonials = [
-    {
-      name: 'Sarah Chen',
-      role: 'CTO, TechFlow Inc',
-      content: 'Omsnet transformed our security posture. Their threat intelligence is unmatched.',
-    },
-    {
-      name: 'Marcus Rodriguez',
-      role: 'Security Director, Global Bank',
-      content: 'The incident response team prevented a major breach that could have cost millions.',
-    },
-    {
-      name: 'Dr. Emily Watson',
-      role: 'CIO, HealthFirst',
-      content: 'Compliance and governance services helped us achieve HIPAA certification seamlessly.',
-    },
-  ];
 
   return (
     <div className="min-h-screen">
       <Navigation />
       
-      {/* Hero Section */}
+      {/* Hero Section with Side-by-Side Layout */}
       <section className="relative overflow-hidden cyber-grid">
-        <div className="container mx-auto px-4 py-24 lg:py-32">
-          <div className="text-center space-y-8">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight animate-fade-in">
-              Digital Security
-              <span className="text-primary block gradient-text animate-float">Fortified</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-slide-up">
-              Enterprise-grade cybersecurity solutions protecting your most valuable digital assets with cutting-edge technology and expert threat intelligence.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-              <Button 
-                size="lg" 
-                className="glow text-lg px-8 py-4 hover-lift hover-glow animate-pulse-slow"
-                onClick={() => router.push('/contact')}
-              >
-                Get Protected
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="text-lg px-8 py-4 hover-lift"
-                onClick={() => document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                Learn More
-              </Button>
+        <div className="container mx-auto px-4 py-16 sm:py-20 lg:py-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Hero Content */}
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight animate-fade-in">
+                  Digital Security
+                  <span className="text-primary block gradient-text animate-float">Fortified</span>
+                </h1>
+                <p className="text-xl text-muted-foreground animate-slide-up">
+                  Enterprise-grade cybersecurity solutions protecting your most valuable digital assets with cutting-edge technology and expert threat intelligence.
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4 animate-slide-up">
+                <Button 
+                  size="lg" 
+                  className="glow text-lg px-8 py-4 hover-lift hover-glow animate-pulse-slow"
+                  onClick={() => router.push('/contact')}
+                >
+                  Get Protected
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  className="text-lg px-8 py-4 hover-lift"
+                  onClick={() => document.getElementById('services-section')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                  Learn More
+                </Button>
+              </div>
+            </div>
+
+            {/* Right Column - Visitor Information */}
+            <div className="space-y-6">
+              <div className="text-center lg:text-left space-y-4">
+                <h2 className="text-2xl md:text-3xl font-bold animate-fade-in">Real-Time Security Monitoring</h2>
+                <p className="text-lg text-muted-foreground animate-slide-up">
+                  See your connection details and security status in real-time
+                </p>
+              </div>
+              <VisitorInfo />
             </div>
           </div>
         </div>
@@ -139,37 +139,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold animate-fade-in">Trusted by Industry Leaders</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto animate-slide-up">
-              See what our clients say about our cybersecurity expertise and service delivery.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {testimonials.map((testimonial, index) => (
-              <Card 
-                key={index} 
-                className="border-border/40 hover-lift hover:glow animate-slide-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <CardContent className="pt-6">
-                  <div className="space-y-4">
-                    <p className="text-lg italic">&ldquo;{testimonial.content}&rdquo;</p>
-                    <div>
-                      <div className="font-semibold">{testimonial.name}</div>
-                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Contact CTA Section */}
       <section id="contact-cta" className="py-20 bg-primary/10">
